@@ -1,0 +1,92 @@
+* Created by dmitry on 18.05.14.
+ */
+public class Base {
+
+    private int e1, e2, r1, r2, r3, r4, r5; // говнокод :)
+    private double G22;
+    private double G21;
+    private double j2;
+    private double f1;
+    private double f2;
+    private double f3 = 0;
+    private double f4 = 0;
+    private double i1;
+    private double i2;
+    private double i3;
+    private double i4;
+    private double i5;
+    private double i6;
+
+
+    public Base(int E1, int E2, int R1, int R2, int R3, int R4, int R5)
+    {
+        e1 = E1;
+        e2 = E2;
+        r1 = R1;
+        r2 = R2;
+        r3 = R3;
+        r4 = R4;
+        r5 = R5;
+    }
+
+    private double G22()
+    {
+        G22 = 1/r2 + 1/r1 + 1/r3;
+        System.out.print("G22 = " + G22);
+
+        return G22;
+    }
+
+    private double G21()
+    {
+        G21 = -1/r2;
+        System.out.print("G21 = " + G21);
+        return G21;
+    }
+
+    public void calculate()
+    {
+        G22 = 1/r2 + 1/r1 + 1/r3;
+        G21 = -1/r2;
+        System.out.print("G22 = " + G22);
+        System.out.print("G21 = " + G21);
+        f1 = -e2;
+        j2 = e1/r1;
+        System.out.print("j2 = " + j2);
+
+        f2 = (j2 - f1 *G21)/G22;
+        System.out.print("f2 = " + f2);
+
+        i1 = (-e1 + (f2 - f4))/r1;
+        i2 = (f2-f1)/r2;
+        i3 = (f2-f4)/r3;
+        i4 = (f1-f3)/r4;
+        i5 = i2 - i4;
+        i6 = -i5 - i4;
+    }
+
+    public double getI1()
+    {
+        return i1;
+    }
+    public double getI2()
+    {
+        return i2;
+    }
+    public double getI3()
+    {
+        return i3;
+    }
+    public double getI4()
+    {
+        return i4;
+    }
+    public double getI5()
+    {
+        return i5;
+    }
+    public double getI6()
+    {
+        return i6;
+    }
+}
