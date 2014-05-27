@@ -1,0 +1,113 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+/**
+ * Created by dmitry on 08.05.14.
+ */
+public class Forma {
+
+    public static Image visibleImage;
+    public JButton button1;
+    public JPanel panel1;
+    public JLabel label;
+    public JPanel panel2;
+    public JTextField E1;
+    public JTextField E2;
+    public JTextField R1;
+    public JTextField R2;
+    public JTextField R3;
+    public JTextField R4;
+    public JTextField R5;
+    private JLabel e1label;
+    private JLabel e2label;
+    private JLabel r1label;
+    private JLabel r2label;
+    private JLabel r3label;
+    private JLabel r4label;
+    private JLabel r5label;
+    public JTextField I1;
+    public JTextField I2;
+    public JTextField I3;
+    public JTextField I4;
+    public JTextField I5;
+    public JTextField I6;
+    public JPanel panel3;
+    public JButton goButton;
+    Base Base;
+
+
+
+    public Forma() {
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                label.setText("Dima win!!!");
+                goButton.setEnabled(true);
+                E1.setEnabled(true);
+                E2.setEnabled(true);
+                R1.setEnabled(true);
+                R2.setEnabled(true);
+                R3.setEnabled(true);
+                R4.setEnabled(true);
+                R5.setEnabled(true);
+
+
+            }
+        });
+        goButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                I1.setText("Go");
+                I2.setText("Go");
+                I3.setText("Go");
+                I4.setText("Go");
+                I5.setText("Go");
+                I6.setText("Go");
+
+                Base = new Base(   Integer.parseInt(E1.getText()),
+                        Integer.parseInt(E2.getText()),
+                        Integer.parseInt(R1.getText()),
+                        Integer.parseInt(R2.getText()),
+                        Integer.parseInt(R3.getText()),
+                        Integer.parseInt(R4.getText()),
+                        Integer.parseInt(R5.getText())
+                );
+
+                Base.calculate();
+
+                I1.setText(Double.toString(Base.getI1()));
+                I2.setText(Double.toString(Base.getI2()));
+                I3.setText(Double.toString(Base.getI3()));
+                I4.setText(Double.toString(Base.getI4()));
+                I5.setText(Double.toString(Base.getI5()));
+                I6.setText(Double.toString(Base.getI6()));
+
+
+
+            }
+        });
+    }
+
+
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Forma");
+        frame.setContentPane(new Forma().panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+
+
+        JFrame Img = new JFrame("Img");
+        Img.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Img.setVisible(true);
+
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
+}
