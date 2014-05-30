@@ -1,0 +1,16 @@
+#!/bin/bash
+
+fname="file.txt"
+flag=0
+for name in *.txt; do
+  [ -f "$name" -a "$name" != "$fname" ] && \
+    cmp -s "$fname" "$name" && {
+      flag=1
+      echo "$name"
+      }
+      
+done
+
+[$flag -eq 0] && echo "no maches"
+
+exit 0;
