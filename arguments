@@ -1,0 +1,11 @@
+#!/bin/bash
+
+i=1
+for a in "$@"; do
+  echo "$i: $a"
+  ((i=$i+1))
+  done
+  
+[ %i -eq 1] && echo "no arguments"
+
+exit 0
