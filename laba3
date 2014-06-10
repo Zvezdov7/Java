@@ -1,0 +1,78 @@
+#include <dirent.h>
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+        int count=0,k=0;
+        int maincount=0;
+        char path[50] = "./";
+        DIR *c,*d,*e;
+        struct dirent *co;
+        struct dirent *dir;
+        struct dirent *ep;
+
+        c = opendir(".");
+                if(c) while((co = readdir(c)) != NULL)if(co->d_type & DT_DIR) ma
+        closedir(c);
+
+        char name[maincount][50];
+        int num[maincount];
+
+        d = opendir(".");
+
+        if(d)
+        {
+                while ((dir = readdir(d)) != NULL )
+                {
+
+                        if (dir->d_type & DT_DIR)
+                        {
+                                strcpy(name[k],dir->d_name);
+                                strcat(path,dir->d_name);
+
+                                e=opendir(path);
+                                    if(e) {
+
+                                        while((ep = readdir(e)) !=NULL) count++;
+                                        num[k] = count;
+                                        count = 0;
+                                        }
+
+                                closedir(e);
+                                k++;
+                                strcpy(path,"./");
+
+                        }
+                }
+                closedir(d);
+        }
+
+        int i,j,t;
+        char temp[50];
+        for(i=0;i < (maincount -1); i++)
+        {
+                for(j = (i+1); j<maincount; j++)
+                {
+                        if(num[i]<num[j])
+                        {
+                            t = num[i];
+                            num[i] = num[j];
+                            num[j] = t;
+
+                            strcpy(temp,name[i]);
+                            strcpy(name[i],name[j]);
+                            strcpy(name[j],temp);
+                        }
+                }
+        }
+
+        printf("\n");
+
+        for(i=0;i < maincount;i++)
+        {
+                printf("# %s - files: %d\n",name[i],num[i]);
+        }
+
+        return(0);
+}
