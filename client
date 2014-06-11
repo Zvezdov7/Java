@@ -1,0 +1,63 @@
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/bio.h>
+#include "server.h"
+
+int main(int argc, char **argv)
+{
+        struct message msg;
+        int n,fdpub,fdpriv;
+        char line[LINESIZE];
+        sprintf(msg.privfifo,"FiFo%d",getpid());
+        if(mkfifo(msg.privfifo,0666)==-1)
+        {
+                perror(msg.privfifo);
+                exit(1);
+        }
+        if((fdpub=open(PUBLIC,O_WRONLY))==-1)
+        {
+                perror(PUBLIC);
+                exit(2);
+        }
+        strcpy(msg.filename, argv[1]);
+        write(fdpub,(char*)&msg,sizeof(msg));
+        if((fdpriv=open(msg.privfifo, O_RDONLY))==-1)
+        {
+                perror(msg.privfifo);
+                exit(3);
+        }
+        int allCount = 0;
+        int k=0,i=0;
+        while((n = read(fdpriv,line,LINESIZE))>0)
+        {
+                char str[25][500];
+                int count=0,j=0;
+                while(line[i] != '\0')
+                {
+                        while(line[i] != '\n' && line[i] != '\0')
+                        {
+                                if(line[i] >= '0' && line[i] <= '9')
+                                {
+                                        count++;
+                                }
+                                str[k][j]=line[i];
+                                i++;
+                                j++;
+                        }
+                        allCount += count;
+                        printf("%s", str[k]);
+                        printf("k = %d\n",k);
+                        printf(" -%d- \n",count);
+                        k++;
+                        j=0;
+                        i++;
+                }
+        }
+        printf("Overall: %d \n",allCount);
+        close(fdpriv);
+        exit(0);
+
+
+        return 0;
+}
