@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main(){
+
+        int fd[2],pid,pid2,status,dead;
+        switch(pid=fork()){
+                case -1:
+                        exit(1);
+                case 0:
+                        pipe(fd);
+                        switch(pid2=fork()){
+                                case -1:
+                                        exit(2);
+                                case 0:
+                                        close(0);dup(fd[0]);close(fd[0]);close(f
+                                        execl("/home/student/ap-21/ap038/Subdir/
+                                        puts("Error f1\n");
+                                        exit(1);
+                                    default:
+                                        close(1); dup(fd[1]);close(fd[1]);close(
+                                        execl("/home/student/ap-21/ap038/Subdir/
+                                        puts("Error f2\n");
+                                        exit(1);
+                        }
+                    default:
+                        dead=wait(&status);
+                        exit(0);
+        }
+
+
+        return 0;
+}
